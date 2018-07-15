@@ -1,0 +1,23 @@
+{
+  "name": "hqjswrapper",
+  "version": "1.0.0",
+  "description": "A node.js wrapper for the Trivia HQ api.",
+  "main": "index.js",
+  "dependencies": {
+    "snekfetch": "^4.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "hq",
+    "trivia hq",
+    "wrapper",
+    "hq wrapper",
+    "js wrapper",
+    "hq js wrapper"
+  ],
+  "author": "dex",
+  "license": "ISC"
+}
