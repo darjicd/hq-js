@@ -1,7 +1,7 @@
 {
-  "name": "hqjswrapper",
+  "name": "hq-js",
   "version": "1.0.0",
-  "description": "A node.js wrapper for the Trivia HQ api.",
+  "description": "Unofficial HQ Trivia module built for interacting with the HQ API.",
   "main": "index.js",
   "dependencies": {
     "snekfetch": "^4.0.4"
