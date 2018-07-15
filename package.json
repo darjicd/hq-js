@@ -1,6 +1,6 @@
 {
   "name": "hq-js",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Unofficial HQ Trivia module built for interacting with the HQ API.",
   "main": "index.js",
   "dependencies": {
@@ -10,13 +10,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/proddex/hq-js.git"
+  },
   "keywords": [
     "hq",
     "trivia hq",
     "wrapper",
     "hq wrapper",
     "js wrapper",
-    "hq js wrapper"
+    "hq js wrapper",
+    "hq-js"
   ],
   "author": "dex",
   "license": "ISC"

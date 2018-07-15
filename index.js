@@ -1,7 +1,9 @@
 const snekfetch = require("snekfetch"),
+    hqUserAgent = "HQ/1.2.19 (co.intermedialabs.hq; build:79; iOS 10.3.3) Alamofire/4.6.0",
     hqUsersEndpoint = "https://api-quiz.hype.space/users",
     hqShowsEndpoint = "https://api-quiz.hype.space/shows/now";
-    hqLeaderboardEndpoint = "https://api-quiz.hype.space/users/leaderboard?mode=1";
+    hqLeaderboardEndpoint = "https://api-quiz.hype.space/users/leaderboard?mode=1",
+    hqVerificationsEndpoint = "https://api-quiz.hype.space/verifications";
 
 class hqjsmodule {
     constructor(bearer) {
@@ -55,6 +57,40 @@ class hqjsmodule {
             snekfetch.get(hqLeaderboardEndpoint).set({'Authorization': `Bearer ${this.bearer}`}).then(res => {
                 resolve(res.body.data)
             }).catch(err => reject(err));
+        });
+    }
+
+    async createPhoneVerification(number){
+        return new Promise((resolve, reject) => {
+            if (!this.bearer) return;
+            if (!number) return reject("Phone number has not been passed.")
+            snekfetch.post(hqVerificationsEndpoint).set({'User-Agent': hqUserAgent, "method": "sms", "phone": number}).then(res =>{
+                resolve(res.body)
+            }).catch(e => reject(e.body));
+        });
+    }
+
+    async verifySms(verificationId, code){
+        return new Promise((resolve, reject) => {
+            if (!this.bearer) return;
+            if (!verificationId) return reject("Verification ID is missing.");
+            if (!code) return reject("Verification code is missing.")
+            snekfetch.post(`${hqVerificationsEndpoint}/${verificationId}`).set({'User-Agent': hqUserAgent, "code": code}).then(res => {
+                resolve(res.body)
+            }).catch(e => reject(e.body));
+        });
+    }
+
+    async createAccount(verificationId, region, username, referrer){
+        return new Promise((resolve, reject) => {
+            if (!this.bearer) return;
+            if (!verificationId) return reject("Verification ID is missing.");
+            if (!code) return reject("Region name is missing.")
+            if (!username) return reject("Username is missing.")
+            if (!referrer) return reject("Referrer name is missing.")
+            snekfetch.post(hqUsersEndpoint).set({'User-Agent': hqUserAgent,'locale': region,'username': username,'verificationId': verificationId,'language': 'en','referringUsername': referrer}).then(res => {
+                resolve(res.body)
+            }).catch(e => reject(e.body));
         });
     }
 }
