@@ -5,7 +5,7 @@ Unofficial HQ Trivia module built for interacting with the HQ API.
 First of all, you will need to get your Bearer token which you would have to sniff from your device. I personally used `mitmproxy` which is my favourite for an iPhone.
 
 To get started, you need to require the module and create a client passing your bearer token:
-```
+```js
 const hqJSWrapper = require('hqJSWrapper'),
     hq = new hqJSWrapper('Bearer token goes here');
 ```
