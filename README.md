@@ -1,6 +1,10 @@
 # hqJSWrapper
 Unofficial HQ Trivia module built for interacting with the HQ API.
 
+```
+npm i --save hqjswrapper
+```
+
 ## Getting Started & Basic Info
 First of all, you will need to get your Bearer token which you would have to sniff from your device. I personally used `mitmproxy` which is my favourite for an iPhone.
 
