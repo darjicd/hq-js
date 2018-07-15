@@ -1,6 +1,7 @@
 const snekfetch = require("snekfetch"),
     hqUsersEndpoint = "https://api-quiz.hype.space/users",
     hqShowsEndpoint = "https://api-quiz.hype.space/shows/now";
+    hqLeaderboardEndpoint = "https://api-quiz.hype.space/users/leaderboard?mode=1";
 
 class hqjsmodule {
     constructor(bearer) {
@@ -47,6 +48,14 @@ class hqjsmodule {
                 resolve(res.body.upcoming[0])
             }).catch(e => reject(e));
         })
+    }
+    async getLeaderboard(){
+        return new Promise((resolve, reject) => {
+            if(!this.bearer) return;
+            snekfetch.get(hqLeaderboardEndpoint).set({"Authorization" : `Bearer ${this.bearer}`}).then(res => {
+                resolve(res.body.data)
+            }).catch(err => reject(err));
+        });
     }
 }
 
