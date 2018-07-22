@@ -1,10 +1,11 @@
 {
   "name": "hq-js",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Unofficial HQ Trivia module built for interacting with the HQ API.",
   "main": "index.js",
   "dependencies": {
-    "snekfetch": "^4.0.4"
+    "snekfetch": "^4.0.4",
+    "ws": "^5.2.2"
   },
   "devDependencies": {},
   "scripts": {
