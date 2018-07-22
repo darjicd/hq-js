@@ -2,18 +2,21 @@ const snekfetch = require("snekfetch"),
     Websocket = require("ws"),
     hqUserAgent = "HQ/1.2.19 (co.intermedialabs.hq; build:79; iOS 10.3.3) Alamofire/4.6.0",
     hqClient = "iOS/1.2.19 b79",
-    hqUsersEndpoint = "https://api-quiz.hype.space/users",
+    hqUsersEndpoint = "https://api-quiz.hype.space/users";
     hqShowsEndpoint = "https://api-quiz.hype.space/shows/now";
-    hqLeaderboardEndpoint = "https://api-quiz.hype.space/users/leaderboard?mode=1",
+    hqLeaderboardEndpoint = "https://api-quiz.hype.space/users/leaderboard?mode=1";
     hqVerificationsEndpoint = "https://api-quiz.hype.space/verifications";
+    hqSelfDataEndpoint = "https://api-quiz.hype.space/users/me";
+    hqFriendsEndpoint = "https://api-quiz.hype.space/friends";
 
 class hqjsmodule {
-    constructor(bearer) {
+    constructor(bearer, userId) {
         if (bearer != null) {
             this.bearer = bearer;
         } else {
             console.log('You need to pass your bearer token.');
         }
+        if (userId != null) this.userId = userId;
     }
 
     async getUserData(username){
@@ -95,6 +98,22 @@ class hqjsmodule {
             }).catch(e => reject(e.body));
         });
     }
-}
 
+    async getSelfData(){
+        return new Promise((resolve, reject) => {
+            if (!this.bearer) return;
+            snekfetch.get(hqSelfDataEndpoint).set({"Authorization": `Bearer ${this.bearer}`}).then(r => {
+                resolve(r.body);
+            }).catch(e => reject(e.body))
+        });
+    }
+    async getFriendsData(){
+        return new Promise((resolve, reject) => {
+            if (!this.bearer) return;
+            snekfetch.get(hqFriendsEndpoint).set({"Authorization": `Bearer ${this.bearer}`}).then(r => {
+                resolve(r.body);
+            }).catch(e => reject(e.body))
+        })
+    }
+}
 module.exports = hqjsmodule;
