@@ -67,7 +67,6 @@ class hqjsmodule {
 
     async createPhoneVerification(number){
         return new Promise((resolve, reject) => {
-            if (!this.bearer) return;
             if (!number) return reject("Phone number has not been passed.")
             snekfetch.post(hqVerificationsEndpoint).set({'User-Agent': hqUserAgent, "x-hq-client": hqClient}).send({"method": "sms", "phone": number}).then(res =>{
                 resolve(res.body)
@@ -77,7 +76,6 @@ class hqjsmodule {
 
     async verifySms(verificationId, code){
         return new Promise((resolve, reject) => {
-            if (!this.bearer) return;
             if (!verificationId) return reject("Verification ID is missing.");
             if (!code) return reject("Verification code is missing.")
             snekfetch.post(`${hqVerificationsEndpoint}/${verificationId}`).set({'User-Agent': hqUserAgent, "x-hq-client": hqClient}).send({"code": code}).then(res => {
@@ -88,7 +86,6 @@ class hqjsmodule {
 
     async createAccount(verificationId, region, username, referrer){
         return new Promise((resolve, reject) => {
-            if (!this.bearer) return;
             if (!verificationId) return reject("Verification ID is missing.");
             if (!code) return reject("Region name is missing.")
             if (!username) return reject("Username is missing.")
