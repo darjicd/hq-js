@@ -68,7 +68,7 @@ class hqjsmodule {
     async createPhoneVerification(number){
         return new Promise((resolve, reject) => {
             if (!number) return reject("Phone number has not been passed.")
-            snekfetch.post(hqVerificationsEndpoint).set({'User-Agent': hqUserAgent, "x-hq-client": hqClient}).send({"method": "sms", "phone": number}).then(res =>{
+            snekfetch.post(hqVerificationsEndpoint).set(`User-Agent`, hqUserAgent).set(`x-hq-client`, hqClient).send({"method": "sms", "phone": number}).then(res =>{
                 resolve(res.body)
             }).catch(e => reject(e.body));
         });
@@ -78,7 +78,7 @@ class hqjsmodule {
         return new Promise((resolve, reject) => {
             if (!verificationId) return reject("Verification ID is missing.");
             if (!code) return reject("Verification code is missing.")
-            snekfetch.post(`${hqVerificationsEndpoint}/${verificationId}`).set({'User-Agent': hqUserAgent, "x-hq-client": hqClient}).send({"code": code}).then(res => {
+            snekfetch.post(`${hqVerificationsEndpoint}/${verificationId}`).set(`User-Agent`, hqUserAgent).set(`x-hq-client`, hqClient).send({"code": code}).then(res => {
                 resolve(res.body)
             }).catch(e => reject(e.body));
         });
@@ -87,10 +87,10 @@ class hqjsmodule {
     async createAccount(verificationId, region, username, referrer){
         return new Promise((resolve, reject) => {
             if (!verificationId) return reject("Verification ID is missing.");
-            if (!code) return reject("Region name is missing.")
+            if (!region) return reject("Region name is missing.")
             if (!username) return reject("Username is missing.")
             if (!referrer) return reject("Referrer name is missing.")
-            snekfetch.post(hqUsersEndpoint).set({'User-Agent': hqUserAgent, "x-hq-client": hqClient}).send({'locale': region,'username': username,'verificationId': verificationId,'language': 'en','referringUsername': referrer}).then(res => {
+            snekfetch.post(hqUsersEndpoint).set(`User-Agent`, hqUserAgent).set(`x-hq-client`, hqClient).send({'locale': region,'username': username,'verificationId': verificationId,'language': 'en','referringUsername': referrer}).then(res => {
                 resolve(res.body)
             }).catch(e => reject(e.body));
         });
